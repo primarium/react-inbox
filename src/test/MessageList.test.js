@@ -1,9 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-//import MessageList from '../components/MessageList';
+import { shallow } from 'enzyme'
+import MessageList from '../components/MessageList';
 
-xit('renders without crashing', () => {
-  //const div = document.createElement('div');
-  //ReactDOM.render(<App />, div);
-  //ReactDOM.unmountComponentAtNode(div);
-});
+describe('message list tests', () => {
+    it('renders without crashing', () => {
+        const messageList = shallow(<MessageList />)
+
+        expect(messageList.find('ul')).toHaveLength(1)
+    });
+})

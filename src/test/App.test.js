@@ -1,8 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import App from '../components/App';
-import {shallow} from 'enzyme'
+import { shallow } from 'enzyme'
+import MessageList from '../components/MessageList';
 
-it('renders without crashing', () => {
 
-});
+describe('app tests', () => {
+    it('renders without crashing', () => {
+        const app = shallow(<App />)
+
+        expect(app.find(MessageList)).toHaveLength(1)
+    });
+})
