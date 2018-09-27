@@ -1,6 +1,6 @@
 import initialState from '../initialData'
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = { messages: initialState }, action) => {
     switch (action.type) {
         default:
             return state;
