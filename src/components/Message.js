@@ -1,8 +1,9 @@
 import React from 'react';
 
 export default function Message({ message }) {
+    let className = 'message'
     return (
-        <div>
+        <div className={className}>
             {message.subject}
         </div>
     )

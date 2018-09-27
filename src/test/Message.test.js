@@ -8,5 +8,6 @@ describe('message tests', () => {
         const message = shallow(<Message message={initialState[0]} />)
 
         expect(message.text()).toContain(initialState[0].subject)
+        expect(message.hasClass('message')).toBeTruthy()
     });
 })
