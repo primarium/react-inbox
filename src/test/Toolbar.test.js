@@ -98,4 +98,62 @@ describe('Toolbar tests', () => {
         expect(mockRemoveLabel).toHaveBeenCalledTimes(1)
         expect(mockRemoveLabel).toHaveBeenCalledWith('label')
     })
+
+    it('Toolbar displays correct unread message count when there are 0 unread messages', () => {
+        const newState = JSON.parse(JSON.stringify(initialState))
+        newState.forEach(element => {
+            element.read = true
+        });
+        const toolbar = shallow(<Toolbar {...getMessageCounts(newState)} />)
+
+        expect(toolbar.find('#unreadMessages').text()).toEqual('0 unread messages')
+    })
+
+    it('Toolbar displays correct unread message count when there are more than 1 unread messages', () => {
+        const newState = JSON.parse(JSON.stringify(initialState))
+        newState.forEach(element => {
+            element.read = false
+        });
+        const toolbar = shallow(<Toolbar {...getMessageCounts(newState)} />)
+
+        expect(toolbar.find('#unreadMessages').text()).toEqual(`${newState.length} unread messages`)
+    })
+
+    it('Toolbar displays correct unread message count when there is 1 unread message', () => {
+        const newState = JSON.parse(JSON.stringify(initialState))
+        newState.forEach(element => {
+            element.read = true
+        });
+        newState[1].read = false
+        const toolbar = shallow(<Toolbar {...getMessageCounts(newState)} />)
+
+        expect(toolbar.find('#unreadMessages').text()).toEqual('1 unread message')
+    })
+
+
+    it('Toolbar actions are disabled if no items are selected', () => {
+        const newState = JSON.parse(JSON.stringify(initialState))
+        newState.forEach(element => {
+            delete element.selected
+        });
+        const toolbar = shallow(<Toolbar {...getMessageCounts(newState)} />)
+
+        const ids = ['#markAsReadButton', '#markAsUnreadButton', '#applyLabelDropdown', '#removeLabelDropdown', '#deleteButton']
+        ids.forEach((element) => {
+            expect(toolbar.find(element).props().disabled).toBeTruthy()
+        })
+    })
+    it('Toolbar actions are disabled if no items are selected', () => {
+        const newState = JSON.parse(JSON.stringify(initialState))
+        newState.forEach(element => {
+            delete element.selected
+        });
+        newState[1].selected = true
+        const toolbar = shallow(<Toolbar {...getMessageCounts(newState)} />)
+
+        const ids = ['#markAsReadButton', '#markAsUnreadButton', '#applyLabelDropdown', '#removeLabelDropdown', '#deleteButton']
+        ids.forEach((element) => {
+            expect(toolbar.find(element).props().disabled).toBeFalsy()
+        })
+    })
 })
