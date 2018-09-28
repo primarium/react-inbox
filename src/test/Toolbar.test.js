@@ -76,4 +76,26 @@ describe('Toolbar tests', () => {
 
         expect(mockDelete).toHaveBeenCalledTimes(1)
     })
+
+    it('calls the onApplyLabel prop when the apply label dropdown is changed', () => {
+        const mockApplyLabel = jest.fn()
+        const toolbar = shallow(<Toolbar onApplyLabel={mockApplyLabel} />)
+        const applyLabelDropdown = toolbar.find('#applyLabelDropdown')
+
+        applyLabelDropdown.simulate('change', { target: { value: 'label' } })
+
+        expect(mockApplyLabel).toHaveBeenCalledTimes(1)
+        expect(mockApplyLabel).toHaveBeenCalledWith('label')
+    })
+
+    it('calls the onRemoveLabel prop when the remove label dropdown is changed', () => {
+        const mockRemoveLabel = jest.fn()
+        const toolbar = shallow(<Toolbar onRemoveLabel={mockRemoveLabel} />)
+        const removeLabelDropdown = toolbar.find('#removeLabelDropdown')
+
+        removeLabelDropdown.simulate('change', { target: { value: 'label' } })
+
+        expect(mockRemoveLabel).toHaveBeenCalledTimes(1)
+        expect(mockRemoveLabel).toHaveBeenCalledWith('label')
+    })
 })

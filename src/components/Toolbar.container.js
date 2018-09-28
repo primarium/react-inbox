@@ -12,7 +12,9 @@ const mapDispatchToProps = (dispatch) => {
         onSelectAll: () => dispatch(Actions.clickSelectAll()),
         onMarkAsRead: () => dispatch(Actions.clickMarkAsRead()),
         onMarkAsUnread: () => dispatch(Actions.clickMarkAsUnread()),
-        onDelete: () => dispatch(Actions.clickDelete())
+        onDelete: () => dispatch(Actions.clickDelete()),
+        onApplyLabel: (label) => dispatch(Actions.clickApplyLabel(label)),
+        onRemoveLabel: (label) => dispatch(Actions.clickRemoveLabel(label))
     }
 }
 

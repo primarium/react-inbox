@@ -5,6 +5,8 @@ export default class Actions {
     static get ClickMarkAsReadType() { return 4 }
     static get ClickMarkAsUnreadType() { return 5 }
     static get ClickDeleteType() { return 6 }
+    static get ClickApplyLabelType() { return 7 }
+    static get ClickRemoveLabelType() { return 8 }
 
     static clickStar(id) {
         return { type: Actions.ClickStarType, payload: id }
@@ -28,5 +30,13 @@ export default class Actions {
 
     static clickDelete() {
         return { type: Actions.ClickDeleteType }
+    }
+
+    static clickApplyLabel(label) {
+        return { type: Actions.ClickApplyLabelType, payload: label }
+    }
+
+    static clickRemoveLabel(label) {
+        return { type: Actions.ClickRemoveLabelType, payload: label }
     }
 }

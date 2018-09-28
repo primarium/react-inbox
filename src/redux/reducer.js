@@ -15,6 +15,10 @@ const reducer = (state = { messages: initialState }, action) => {
             return clickMarkRead(state, false)
         case Actions.ClickDeleteType:
             return clickDelete(state)
+        case Actions.ClickApplyLabelType:
+            return clickApplyLabel(state, action)
+        case Actions.ClickRemoveLabelType:
+            return clickRemoveLabel(state, action)
         default:
             return state;
     }
@@ -75,4 +79,27 @@ const clickDelete = (state) => {
     return newState
 }
 
+const clickApplyLabel = (state, action) => {
+    const newState = JSON.parse(JSON.stringify(state))
+    for (const message of newState.messages) {
+        if (message.selected && !message.labels.includes(action.payload)) {
+            message.labels.push(action.payload)
+        }
+    }
+    return newState
+}
+
+
+const clickRemoveLabel = (state, action) => {
+    const newState = JSON.parse(JSON.stringify(state))
+    for (const message of newState.messages) {
+        if (message.selected) {
+            const labelIndex = message.labels.indexOf(action.payload)
+            if (labelIndex > -1) {
+                message.labels.splice(labelIndex, 1)
+            }
+        }
+    }
+    return newState
+}
 export default reducer;

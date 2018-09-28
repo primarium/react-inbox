@@ -97,4 +97,29 @@ describe('reducer tests', () => {
 
         expect(reducer(initialState, { type: Actions.ClickDeleteType })).toEqual(expectedState)
     })
+
+    it('when a label is applied, all selected items will have the label (once)', () => {
+        initialState.messages[1].labels.push('label')
+        initialState.messages[4].selected = true
+        expectedState.messages[4].selected = true
+        expectedState.messages.forEach(element => {
+            if (element.selected) {
+                element.labels.push('label')
+            }
+        });
+
+        expect(reducer(initialState, { type: Actions.ClickApplyLabelType, payload: 'label' })).toEqual(expectedState)
+    })
+
+    it('when a label is removed, all selected items will no longer have the label', () => {
+        initialState.messages.forEach(element => {
+            if (element.selected) {
+                element.labels.push('label')
+            }
+        })
+        initialState.messages[4].selected = true
+        expectedState.messages[4].selected = true
+
+        expect(reducer(initialState, { type: Actions.ClickRemoveLabelType, payload: 'label' })).toEqual(expectedState)
+    })
 })
