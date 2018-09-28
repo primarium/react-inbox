@@ -7,12 +7,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         'navMessageEdit': (id) => dispatch(navMessageEdit(id)),
-//         'navAddMessage': () => dispatch(navMessageAdd()),
-//         'peopleGet': () => dispatch(peopleGet())
-//     }
-// }
-
 export default connect(mapStateToProps)(MessageList);
