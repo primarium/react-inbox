@@ -3,8 +3,8 @@ import Message from './Message.container';
 
 export default function MessageList({ messages }) {
     return (
-        <ul>
-            {messages.map(m => <li key={m.id}><Message message={m} /></li>)}
-        </ul>
+        <div>
+            {messages.map(m => <div key={m.id}><Message message={m} /></div>)}
+        </div>
     )
 }

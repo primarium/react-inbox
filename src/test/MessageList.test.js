@@ -8,7 +8,6 @@ describe('message list tests', () => {
     it('renders without crashing', () => {
         const messageList = shallow(<MessageList messages={initialState} />)
 
-        expect(messageList.find('ul')).toHaveLength(1)
         expect(messageList.find(Message)).toHaveLength(initialState.length)
     });
 })
