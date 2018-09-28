@@ -13,6 +13,8 @@ const reducer = (state = { messages: initialState }, action) => {
             return clickMarkRead(state, true)
         case Actions.ClickMarkAsUnreadType:
             return clickMarkRead(state, false)
+        case Actions.ClickDeleteType:
+            return clickDelete(state)
         default:
             return state;
     }
@@ -58,6 +60,16 @@ const clickMarkRead = (state, read) => {
     for (const message of newState.messages) {
         if (message.selected) {
             message.read = read
+        }
+    }
+    return newState
+}
+
+const clickDelete = (state) => {
+    const newState = JSON.parse(JSON.stringify(state))
+    for (let i = newState.messages.length - 1; i >= 0; i--) {
+        if (newState.messages[i].selected) {
+            newState.messages.splice(i, 1)
         }
     }
     return newState

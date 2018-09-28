@@ -4,6 +4,7 @@ export default class Actions {
     static get ClickSelectAllType() { return 3 }
     static get ClickMarkAsReadType() { return 4 }
     static get ClickMarkAsUnreadType() { return 5 }
+    static get ClickDeleteType() { return 6 }
 
     static clickStar(id) {
         return { type: Actions.ClickStarType, payload: id }
@@ -23,5 +24,9 @@ export default class Actions {
 
     static clickMarkAsUnread() {
         return { type: Actions.ClickMarkAsUnreadType }
+    }
+
+    static clickDelete() {
+        return { type: Actions.ClickDeleteType }
     }
 }

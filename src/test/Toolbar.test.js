@@ -66,4 +66,14 @@ describe('Toolbar tests', () => {
 
         expect(mockMarkAsUnread).toHaveBeenCalledTimes(1)
     })
+
+    it('calls the onDelete prop when the delete button is clicked', () => {
+        const mockDelete = jest.fn()
+        const toolbar = shallow(<Toolbar onDelete={mockDelete} />)
+        const deleteButton = toolbar.find('#deleteButton')
+
+        deleteButton.simulate('click')
+
+        expect(mockDelete).toHaveBeenCalledTimes(1)
+    })
 })

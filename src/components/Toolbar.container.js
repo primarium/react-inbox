@@ -11,7 +11,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onSelectAll: () => dispatch(Actions.clickSelectAll()),
         onMarkAsRead: () => dispatch(Actions.clickMarkAsRead()),
-        onMarkAsUnread: () => dispatch(Actions.clickMarkAsUnread())
+        onMarkAsUnread: () => dispatch(Actions.clickMarkAsUnread()),
+        onDelete: () => dispatch(Actions.clickDelete())
     }
 }
 

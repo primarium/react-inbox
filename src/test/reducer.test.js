@@ -77,6 +77,7 @@ describe('reducer tests', () => {
 
         expect(reducer(initialState, { type: Actions.ClickMarkAsReadType })).toEqual(expectedState)
     })
+
     it('when mark as unread is clicked, all selected items are marked as unread', () => {
         expectedState.messages.forEach(element => {
             if (element.selected) {
@@ -85,5 +86,15 @@ describe('reducer tests', () => {
         });
 
         expect(reducer(initialState, { type: Actions.ClickMarkAsUnreadType })).toEqual(expectedState)
+    })
+
+    it('deletes the selected messages when delete is clicked', () => {
+        for (let i = expectedState.messages.length - 1; i >= 0; i--) {
+            if (expectedState.messages[i].selected) {
+                expectedState.messages.splice(i, 1)
+            }
+        }
+
+        expect(reducer(initialState, { type: Actions.ClickDeleteType })).toEqual(expectedState)
     })
 })

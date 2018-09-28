@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Toolbar({ totalMessages, unreadMessages, selectedMessages, onSelectAll, onMarkAsRead, onMarkAsUnread }) {
+export default function Toolbar({ totalMessages, unreadMessages, selectedMessages, onSelectAll, onMarkAsRead, onMarkAsUnread, onDelete }) {
     let checkboxClass = 'fa '
     if (selectedMessages == 0) {
         checkboxClass += 'fa-square-o'
@@ -19,6 +19,9 @@ export default function Toolbar({ totalMessages, unreadMessages, selectedMessage
             </button>
             <button id="markAsUnreadButton" className="btn btn-default" onClick={onMarkAsUnread}  >
                 Mark As Unread
+            </button>
+            <button id="deleteButton" className="btn btn-default" onClick={onDelete}  >
+                <i class="fa fa-trash-o"></i>
             </button>
         </div>
     )
