@@ -1,24 +1,20 @@
 import React from 'react';
 
-export default function Message({ message }) {
+export default function Message({ message, onClickStar, onClickCheckbox }) {
     const starredClass = message.starred ? 'fa-star' : 'fa-star-o'
     let className = 'row message ' + (message.read ? 'read' : 'unread')
-    let checkbox
     if (message.selected) {
-        checkbox = <input type="checkbox" checked="checked" />
         className += ' selected'
-    } else {
-        checkbox = <input type="checkbox" />
     }
     return (
         <div className={className}>
             <div className="col-xs-1">
                 <div className="row">
                     <div className="col-xs-2">
-                        {checkbox}
+                        <input type="checkbox" checked={Boolean(message.selected)} onChange={() => onClickCheckbox(message.id)} />
                     </div>
                     <div className="col-xs-2">
-                        <i className={`star fa ${starredClass}`}></i>
+                        <i className={`star fa ${starredClass}`} onClick={() => onClickStar(message.id)} ></i>
                     </div>
                 </div>
             </div>

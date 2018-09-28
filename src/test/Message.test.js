@@ -40,7 +40,7 @@ describe('message tests', () => {
 
         expect(unselectedMessage.hasClass('selected')).toBeFalsy()
         expect(unselectedMessage.find('input').props().type).toEqual('checkbox')
-        expect(unselectedMessage.find('input').props()).not.toHaveProperty('checked')
+        expect(unselectedMessage.find('input').props().checked).toBeFalsy()
     });
 
     it('selected message has correct classes and checkbox is checked', () => {
@@ -48,7 +48,7 @@ describe('message tests', () => {
 
         expect(selectedMessage.hasClass('selected')).toBeTruthy()
         expect(selectedMessage.find('input').props().type).toEqual('checkbox')
-        expect(selectedMessage.find('input').props()).toHaveProperty('checked', 'checked')
+        expect(selectedMessage.find('input').props().checked).toBeTruthy()
     });
 
     it('displays the correct labels', () => {
@@ -59,5 +59,27 @@ describe('message tests', () => {
         labels.forEach((label, index) => {
             expect(label.text()).toEqual(initialState[0].labels[index])
         })
+    })
+
+    it('calls the onClickStar prop when the star is clicked', () => {
+        const mockClickStar = jest.fn()
+        const message = shallow(<Message message={initialState[0]} onClickStar={mockClickStar} />)
+        const star = message.find('.star')
+
+        star.simulate('click')
+
+        expect(mockClickStar).toHaveBeenCalledTimes(1)
+        expect(mockClickStar).toHaveBeenCalledWith(initialState[0].id)
+    })
+
+    it('calls the onClickCheckbox prop when the checkbox is clicked', () => {
+        const mockClickBox = jest.fn()
+        const message = shallow(<Message message={initialState[0]} onClickCheckbox={mockClickBox} />)
+        const checkbox = message.find('input')
+
+        checkbox.simulate('change')
+
+        expect(mockClickBox).toHaveBeenCalledTimes(1)
+        expect(mockClickBox).toHaveBeenCalledWith(initialState[0].id)
     })
 })
