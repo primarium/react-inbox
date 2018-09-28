@@ -9,7 +9,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onSelectAll: () => dispatch(Actions.clickSelectAll())
+        onSelectAll: () => dispatch(Actions.clickSelectAll()),
+        onMarkAsRead: () => dispatch(Actions.clickMarkAsRead()),
+        onMarkAsUnread: () => dispatch(Actions.clickMarkAsUnread())
     }
 }
 

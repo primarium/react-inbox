@@ -9,6 +9,10 @@ const reducer = (state = { messages: initialState }, action) => {
             return clickCheckbox(state, action)
         case Actions.ClickSelectAllType:
             return clickSelectAll(state)
+        case Actions.ClickMarkAsReadType:
+            return clickMarkRead(state, true)
+        case Actions.ClickMarkAsUnreadType:
+            return clickMarkRead(state, false)
         default:
             return state;
     }
@@ -44,6 +48,16 @@ const clickSelectAll = (state) => {
     if (allSelected) {
         for (const message of newState.messages) {
             delete message.selected
+        }
+    }
+    return newState
+}
+
+const clickMarkRead = (state, read) => {
+    const newState = JSON.parse(JSON.stringify(state))
+    for (const message of newState.messages) {
+        if (message.selected) {
+            message.read = read
         }
     }
     return newState

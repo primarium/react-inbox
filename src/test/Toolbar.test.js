@@ -46,4 +46,24 @@ describe('Toolbar tests', () => {
 
         expect(mockSelectAll).toHaveBeenCalledTimes(1)
     })
+
+    it('calls the onMarkAsRead prop when the mark as read button is clicked', () => {
+        const mockMarkAsRead = jest.fn()
+        const toolbar = shallow(<Toolbar onMarkAsRead={mockMarkAsRead} />)
+        const markAsRead = toolbar.find('#markAsReadButton')
+
+        markAsRead.simulate('click')
+
+        expect(mockMarkAsRead).toHaveBeenCalledTimes(1)
+    })
+
+    it('calls the onMarkAsUnread prop when the mark as unread button is clicked', () => {
+        const mockMarkAsUnread = jest.fn()
+        const toolbar = shallow(<Toolbar onMarkAsUnread={mockMarkAsUnread} />)
+        const markAsUnread = toolbar.find('#markAsUnreadButton')
+
+        markAsUnread.simulate('click')
+
+        expect(mockMarkAsUnread).toHaveBeenCalledTimes(1)
+    })
 })

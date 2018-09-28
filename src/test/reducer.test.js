@@ -67,4 +67,23 @@ describe('reducer tests', () => {
 
         expect(reducer(initialState, { type: Actions.ClickSelectAllType })).toEqual(expectedState)
     })
+
+    it('when mark as read is clicked, all selected items are marked as read', () => {
+        expectedState.messages.forEach(element => {
+            if (element.selected) {
+                element.read = true
+            }
+        });
+
+        expect(reducer(initialState, { type: Actions.ClickMarkAsReadType })).toEqual(expectedState)
+    })
+    it('when mark as unread is clicked, all selected items are marked as unread', () => {
+        expectedState.messages.forEach(element => {
+            if (element.selected) {
+                element.read = false
+            }
+        });
+
+        expect(reducer(initialState, { type: Actions.ClickMarkAsUnreadType })).toEqual(expectedState)
+    })
 })
