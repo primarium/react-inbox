@@ -81,7 +81,7 @@ describe('landing page', () => {
     })
     describe('Delete Button', () => {
         it('should have a delete button', () => {
-
+            cy.get('#deleteButton')
         })
         it('should delete a selected message', () => {
             cy.get('#selectAllButton').dblclick()
