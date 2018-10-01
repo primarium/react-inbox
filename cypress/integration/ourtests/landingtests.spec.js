@@ -25,16 +25,27 @@ describe('landing page', () => {
     })
 
     it('should let us select an email', () => {
-        cy.get('.row').get('.message').get('input').first().click()
+        cy.get('#msg1').find('input').click().should('be.checked')
     })
 
-    it('should have a "Mark as Read" button', () => {
-        cy.get('#markAsReadButton').click()
+    describe('mark as read functionality', () => {
+        it('should have a "Mark as Read" button that marks the selected message as read', () => {
+            cy.get('#selectAllButton').click()
+            cy.get('#selectAllButton').click()
+            cy.get('#msg1').find('input').click()
+            cy.get('#markAsReadButton').click()
+            cy.get('#msg1').find('.read').should('exist')
+        });
+    })
 
-    });
-
-    it('should have a "Mark as Unread" button', () => {
-        cy.get('#markAsUnreadButton').click()
+    describe('mark as unread functionality', () => {
+        it('should have a "Mark as UnRead" button that marks the selected message as Unread', () => {
+            cy.get('#selectAllButton').click()
+            cy.get('#selectAllButton').click()
+            cy.get('#msg4').find('input').click()
+            cy.get('#markAsUnreadButton').click()
+            cy.get('#msg4').find('.unread').should('exist')
+        });
     })
 
     describe('appplying and unapplying labels', () => {
@@ -59,7 +70,7 @@ describe('landing page', () => {
                 cy.get('#removeLabelDropdown')
             })
 
-            it.only('should remove a label, from an email, if its selected and the button is clicked, and it has that label', () => {
+            it('should remove a label, from an email, if its selected and the button is clicked, and it has that label', () => {
                 cy.get('#selectAllButton').click()
                 cy.get('#selectAllButton').click()
                 cy.get('#msg3').find('input').click()
@@ -68,9 +79,18 @@ describe('landing page', () => {
             })
         })
     })
+    describe('Delete Button', () => {
+        it('should have a delete button', () => {
 
-    it('should have a delete button', () => {
-        cy.get('#deleteButton').click()
+        })
+        it('should delete a selected message', () => {
+            cy.get('#selectAllButton').dblclick()
+            cy.get('#msg3').find('input').click()
+            cy.get('#deleteButton').click()
+            cy.get('#msg3').should('not.exist')
+        })
     })
+
+
 
 })
